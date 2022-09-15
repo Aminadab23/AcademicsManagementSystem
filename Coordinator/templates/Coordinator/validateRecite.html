@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+<div style="width: 45%">
+    {% if messages %}
+{% for m in messages %}
+    <h2> {{m}} </h2>{% endfor %}
+    {% endif %}
+        <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Academy</th>
+            <th scope="col">Course</th>
+            <th scope="col">Recite</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+         {% for r in recite %}<tr>
+    <form action="{%url 'validate'%}" method="post">
+                {% csrf_token %}
+                
+        {% if r.academy.Ac_name == 'staff' %}
+        
+         {% else %} 
+          <th scope="row">{{ forloop.counter }} </th>
+          <td>{{r.name}}</td> 
+          <td>{{r.email}}</td>
+          <td>{{r.academy}}</td>
+          <td>{{r.course}}</td>
+          <td><a href="{{r.recite.url}}"> {{r.recite.url}}</a></td>
+          <input type="text" name="name" value="{{r.name}}" hidden>
+          <input type="text" name="email" value="{{r.email}}" hidden>
+          <input type="text" name="Academy" value="{{r.academy}}" hidden>
+          <input type="text" name="course" value="{{r.course}}" hidden>
+
+          <input type="text" name="Roll" value="student" hidden>
+          <td><button class="btn btn-primary" type="submit">Validate</button></td>
+       
+        {% endif %}
+         
+        </tr> 
+    </form>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</div>
+</div>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,293 @@
+
+{% load static%}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>WKU AMS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+  {% if user.is_authenticated %}
+    
+            <img src="{{ user.Profilepic.url }}" style="width:45%;" class="w3-round"><br><br>
+            <p class="w3-text-grey w3-large">{{ user.FullName }}</p>
+            <p class="w3-text-grey w3-medium">{{ user.Roll }}</p>
+
+            </div>
+            <div class="w3-bar-block">
+        {% if user.Roll == 'Academic Manager' %}
+        <a href="{% url 'ahome' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Home</a> 
+
+              <a href="{% url 'add-academy' %}"  class="w3-bar-item w3-button w3-padding "><i class="fa fa-plus fa-fw w3-margin-right"></i>Add Academy</a> 
+              <a href="{% url 'add-coordinator'%}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-user-plus fa-fw w3-margin-right"></i>Add Coordinator</a> 
+              <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-check fa-fw w3-margin-right"></i>Verify Certificate</a> 
+              <a href="{% url 'description' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-edit fa-fw w3-margin-right"></i>Edit Description</a> 
+              <a href="{% url 'usermessage' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding "><i class="fa fa-eye fa-fw w3-margin-right"></i>View User Messages</a> 
+
+              <a href="{% url 'updateProfile' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw w3-margin-right"></i>update prorile</a> 
+              </div>
+        {% elif user.Roll == 'Coordinator' %}
+            <a href="{% url 'home' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Home</a> 
+            <a href="{% url 'add-course' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw w3-margin-right"></i>Courses</a> 
+            <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw w3-margin-right"></i>Instructor</a> 
+            <a href="{% url 'addStudent' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user-plus fa-fw w3-margin-right"></i>student</a> 
+            <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus fa-fw w3-margin-right"></i>Assign students</a> 
+            <a href="{% url 'updateProfile' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw w3-margin-right"></i>update profile</a> 
+
+        </div>
+        {% elif user.Roll == 'student' %}
+            <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Home</a> 
+            <a href="{% url 'courseMaterial' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-download fa-fw w3-margin-right"></i>Course Materials</a> 
+            <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fas fa-address-book fa-fw w3-margin-right"></i>Communicate Instructor</a> 
+            <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-edit fa-fw w3-margin-right"></i>Exam</a> 
+            <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-graduation-cap fa-fw w3-margin-right"></i>Certificare</a> 
+            <a href="{% url 'updateProfile' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw w3-margin-right"></i>update profile</a> 
+
+        </div>
+
+    
+
+        {% else %}
+        
+        <a href="{% url 'home' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Home</a> 
+        <a href="add-course" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-question fa-fw w3-margin-right"></i>About</a> 
+        <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-post fa-fw w3-margin-right"></i>Contact us</a> 
+        <a href="{% url 'updateProfile' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-upload fa-fw w3-margin-right"></i>update profile</a> 
+
+        {% endif %}
+    </div>
+ 
+  {% else %}
+      <img src="{% static 'img/logo.jpg' %}" style="width:45%;" class="w3-round"><br><br>
+      <p class="w3-text-grey">Wolkite University</p>
+      </div>
+      <div class="w3-bar-block">
+      <a href="#portfolio" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Home</a> 
+      <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
+      <a href="#courses" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw w3-margin-right"></i>Courses</a> 
+
+      <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
+      </div>
+{% endif %}
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+
+<!-- Header -->
+<header id="portfolio">
+<a href="#"><{% static 'img/logo.jpg' %} style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+<span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+<div class="w3-container">
+<h1><b>Academics Management System</b></h1>
+<div class="w3-section w3-bottombar w3-padding-16">
+  {% if user.is_authenticated %}
+  {% if user.Roll == 'Academic Manager' %}
+  <a href="{% url 'logout' %}" class="w3-button w3-white"><i class="fa fa-sign-out w3-margin-right"></i>Logout</a>
+  <a href="{% url 'login' %}" class="w3-button w3-white"><i class="fa fa-edit w3-margin-right"></i>Edit profile</a>
+  {% elif user.Roll == 'Coordinator' %}
+  <a href="{% url 'logout' %}" class="w3-button w3-white"><i class="fa fa-sign-out w3-margin-right"></i>Logout</a>
+  <a href="{% url 'login' %}" class="w3-button w3-white"><i class="fa fa-edit w3-margin-right"></i>Edit profile</a>
+  {% elif user.Roll == 'student' %}
+  <a href="{% url 'logout' %}" class="w3-button w3-white"><i class="fa fa-sign-out w3-margin-right"></i>Logout</a>
+  <a href="{% url 'login' %}" class="w3-button w3-white"><i class="fa fa-edit w3-margin-right"></i>Edit profile</a>
+  
+  {% else %}
+  <a href="{% url 'logout' %}" class="w3-button w3-white"><i class="fa fa-sign-out w3-margin-right"></i>Logout</a>
+  <button class="w3-button w3-white w3-hide-small" data-toggle="modal" data-target="#umodal"><i class="fa fa-upload w3-margin-right"></i>Upload recite</button>
+  <div id="umodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 280px;">
+        <div class="content-section">
+          <div class="modal-body" style="flex: .8">
+          <form action="reciteUpload" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Upload Recite</legend>
+       <input type="text" name="name" id="" value="{{user.FullName}}" hidden>
+       <input type="text" name="email" id="" value="{{user.email}}" hidden>
+         <div>
+          <div><label for="">Academy</label></div>
+           <select name="academy" id="">
+            {% for a in academy %}
+           {% if a.Ac_name == 'staff' %}
+           {% else %}
+            <option value="{{a.Ac_name}}">{{a.Ac_name}}</option>
+          {% endif %}
+            {% endfor %}
+          </select>
+         </div>
+         <div>
+          <div><label for="">Course</label></div>
+          <select name="course" id="">
+            {% for c in courses %}
+            
+            <option value="{{c.title}}">{{c.title}}</option>
+         
+            {% endfor %}
+          </select>
+         </div>
+         <div>
+          <div><label for="">Recite</label></div>
+          <input type="file" accept=".jpg, .png,.raw" name="recite">
+         </div>
+          
+         
+      </fieldset>
+      <div class="form-group">
+          <button class="btn btn-info btn-lg" type="submit">Upload</button>
+      </div>
+          </form>
+        </div>
+         
+      </div>
+      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+</div> {% endif %}
+  {% else %}
+  <button class="w3-button w3-white w3-hide-small" data-toggle="modal" data-target="#myModal2"><i class="fa fa-sign-in w3-margin-right"></i>Login</button>
+  <button class="w3-button w3-white w3-hide-small" data-toggle="modal" data-target="#myModal"><i class="fa fa-user-plus w3-margin-right"></i>Register</button>
+  
+  <!-- login modal -->
+  <div id="myModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 280px;">
+        <div class="content-section">
+          <div class="modal-body">
+    <form action="login" method="post">
+{% csrf_token %}
+<fieldset class="form-group">
+    <legend class="border-bottom mb-4">Login</legend>
+    <div style="margin: 15px;">
+      <div> <label for="">Email</label></div>
+      <div>  {{ form.email  }}</div>
+    </div>
+    <div style="margin: 15px;">
+      <div><label for="">password</label></div>
+      {{ form.password1 }}
+    </div>
+</fieldset>
+<div class="form-group">
+    <button class="btn btn-outline-info" type="submit">Sign in</button>
+</div>
+    </form>
+  </div>
+  <div class="border-top pt-3">
+      <b class="text-muted">Dont have Account??<a href="{% url 'index' %}" class="ml-2">Sign up</a></b>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 280px;">
+        <div class="content-section">
+          <div class="modal-body">
+          <form action="" method="post">
+      {% csrf_token %}
+      <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Join Today</legend>
+          <div style="margin: 15px;">
+            <div> <label for="">Name</label></div>
+            <div>  {{ form.FullName  }}</div>
+          </div>
+          <div style="margin: 15px;">
+            <div><label for="">Email</label></div>
+            {{ form.email }}
+          </div>
+          <div style="margin: 15px;">
+            <div><label for="">password</label></div>
+            {{ form.password1 }}
+          </div>
+          <div style="margin: 15px;">
+           <div> <label for="">Confirm Password</label></div>
+            {{ form.password2 }}
+            <!-- {{ form|crispy }} -->
+          </div>
+      </fieldset>
+      <div class="form-group">
+          <button class="btn btn-info btn-lg" type="submit">Sign Up</button>
+      </div>
+          </form>
+        </div>
+          <div class="border-top pt-3">
+              <b class="text-muted">Already have and account?<a href="{% url 'login' %}" class="ml-2">Sign in</a></b>
+          </div>
+      </div>
+      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+</div>
+  {% endif %}
+
+</div>
+</header>
+{% for message in messages %}
+    
+      <strong>{{message}}</strong>
+    
+ {% endfor %}
+{% block content %}{% endblock content %}
+
+
+
+<div class="w3-black w3-center w3-padding-24">Powered by
+   <a href="#" title="W3.CSS" target="_blank" class="w3-hover-opacity">WKU ICT department</a>
+
+</div>
+
+<!-- End page content -->
+</div>
+
+<script src="{% static 'js/base.js' %}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
+</html>

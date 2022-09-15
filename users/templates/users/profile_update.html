@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="content-section">
+  <div class="media">
+    
+    <div class="media-body" >
+     
+    </div>
+  </div>
+  <form action="" method="POST" enctype="multipart/form-data" style="width: 50%; height: 80%; border: 1px solid #232c34; margin-left: 20%;margin-right: 20%;margin-bottom: 20%;margin-top:0%; align-content: center; border-radius: 10px; -webkit-box-shadow: 26px 24px 19px 2px rgba(0,0,0,0.74);
+  -moz-box-shadow: 26px 24px 19px 2px rgba(0,0,0,0.74);
+  box-shadow: 26px 24px 19px 2px rgba(0,0,0,0.74); background-color: lightblue;">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <div style="margin-left:5%; margin-right:5%; margin-top:2%;">
+        <legend class="border-bottom mb-4" style="margin-left: 20%"><b> Profile Info</b></legend>
+    <div style="margin: 5px;">  
+    <div><div> Email</div>
+    {{ u_form.email }}
+    <div style="width: 180px;"><div> Password</div>
+        {{ u_form.password }}
+        <div style="width: 180px;"><div> Confirm password</div>
+            <input type="password" name="cpass" id="">
+            <div style="width: 180px;"> <div>Confirm password</div>
+                {{p_form.Profilepic}}
+</div></div>
+</div> 
+    </fieldset>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit" style="margin-left: 50%;">Update</button>
+    </div>
+</form>
+</div>
+{% endblock content %}

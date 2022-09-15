@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+<div style="width: 45%">
+    {% if messages %}
+{% for m in messages %}
+    <h2> {{m}} </h2>{% endfor %}
+    {% endif %}
+        <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Message</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+         {% for r in form %}<tr>
+    <form action="" method="post">
+                {% csrf_token %}
+      
+          <th scope="row">{{ forloop.counter }} </th>
+          <td>{{r.name}}</td> 
+          <td>{{r.email}}</td>
+          <td>{{r.message}}</td>
+          <td><p>{{r.course}}</p></td>
+    
+          <input type="text" name="name" value="{{r.name}}" hidden>
+          <input type="text" name="email" value="{{r.email}}" hidden>
+          <input type="text" name="Academy" value="{{r.message}}" hidden>
+         
+          <td><button class="btn btn-danger" type="submit">Delete</button></td>
+        </tr> 
+    </form>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</div>
+</div>
+
+
+
+
+{% endblock content %}

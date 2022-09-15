@@ -1,0 +1,97 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+
+    {% if user.profile.roll == 'academic manager' %}
+   
+    
+      {% elif user.profile.roll == 'coordinator' %}
+
+    {% endif %}
+
+
+{% else %}
+
+{% if messages %}
+  {% for message in messages %}
+    
+      <strong>{{message}}</strong>
+    
+ {% endfor %}
+{% endif %}
+<!-- Footer -->
+{% endif %}
+
+{% for ac in academy %}
+<div class="">
+  <div class="w3-third w3-container w3-margin-bottom">
+    <img src="{{ ac.logo.url }}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+    <div class="w3-container w3-white">
+      <p><b>{{ ac.Ac_name }}</b></p>
+<p>{{ ac.description | slice:"0:100" }} </p>
+<p>Webite Link for <a href="{{ ac.official_web }}"> {{ ac.Ac_name }} </a>
+    </div>
+  </div>
+  {% endfor %}
+
+ 
+
+  <div class="w3-container w3-padding-large" style="margin-bottom:32px">
+    <h4><b>About The Academy</b></h4>
+    {% for d in d %}
+  <p>
+      {{d.name}}
+      {{d.description}}
+      
+  </p> {% endfor %} <hr>
+    
+  <!-- <h4>Totala Number of students</h4>
+  <!-- Progress bars / Skills 
+  <p>Photography</p>
+  <div class="w3-grey">
+    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:95%">95%</div>
+  </div>
+  <p>Web Design</p>
+  <div class="w3-grey">
+    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:85%">85%</div>
+  </div>
+  <p>Photoshop</p>
+  <div class="w3-grey">
+    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:80%">80%</div>
+  </div>
+  <p>
+   
+  </p> -->
+  <hr>
+  
+  <h4>Payments and courses</h4>
+  <div class="container" >
+   
+    <div class="row " style="margin: 0; padding: 0;" >
+  {% for c in courses   %}
+ 
+  <div class=" col-md-5" style="margin-bottom: 25px;  -webkit-box-shadow: 18px 18px 22px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 18px 18px 22px 0px rgba(0,0,0,0.75);
+  box-shadow: 18px 18px 22px 0px rgba(0,0,0,0.75);  " >
+   
+      <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
+        <li class="w3-black w3-xlarge w3-padding-32">{{c.title}}</li>
+        <li class="w3-padding-16">{{c.academy}}</li>
+        <li class="w3-padding-16">{{c.duriation}} semister</li>
+        <li class="w3-padding-16">{{c.payment}} birr/semister</li>
+        
+      </ul>
+ </div>
+  
+ 
+  {% endfor %}
+ 
+
+ </div>
+</div>
+<br><br><br>
+
+
+{% endblock content %}

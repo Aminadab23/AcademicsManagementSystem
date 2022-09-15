@@ -1,0 +1,44 @@
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+
+.ml-5{
+    margin-left : 5px
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+  margin: 10px;
+ 
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  -webkit-box-shadow: 18px 18px 22px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 18px 18px 22px 0px rgba(0,0,0,0.75);
+box-shadow: 18px 18px 22px 0px rgba(0,0,0,0.75);
+  padding: 20px;
+  
+  font-size: 30px;
+  text-align: center;
+  flex: 0.3;
+  
+}
+#showmore{
+  display: none;
+}
+#showless{
+  display: block;
+}
+#smbutton{
+  
+  display: block;
+}
+#smbutton :hover{
+  
+  color: white;
+  background-color: #232c34;
+}
+#slbutton{
+  display: none;
+}

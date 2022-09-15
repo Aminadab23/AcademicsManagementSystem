@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- First Photo Grid-->
+{% for m in messages %}
+  <h1>{{m}}</h1>
+{% endfor %}
+{% for ac in academy %}
+<div class="">
+  
+    <form action="academic-detail" method="post">
+      {% csrf_token %}
+    <div class="w3-third w3-container w3-margin-bottom"><input type="text" name="name" id="" value="{{ac.Ac_name}}" hidden>
+     <button type="submit"> <img src="{{ ac.logo.url }}" alt="Norway" style="width:100%; height: 100%" class="w3-hover-opacity"></button>
+     </form>  <div class="w3-container w3-white">
+      <p><b>{{ ac.Ac_name }}</b></p>
+<p id="less" style="display: block;">{{ ac.description | slice:"0:100" }} </p>
+
+<p>Webite Link for <a href="{{ ac.official_web }}"> {{ ac.Ac_name }} </a>
+    </div>
+  </div>
+  {% endfor %}
+
+
+ 
+
+<div class="w3-container w3-padding-large" style="margin-bottom:32px" id="about">
+  <h4><b>About The Academy</b></h4>
+<p>
+    {% for d in d %}
+    
+    {{d.description}}
+    {% endfor %}
+</p>  <hr>
+<!--   
+  <h4>Totala Number of students</h4>
+  <!-- Progress bars / Skills 
+  <p>Photography</p>
+  <div class="w3-grey">
+    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:95%">95%</div>
+  </div>
+  <p>Web Design</p>
+  <div class="w3-grey">
+    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:85%">85%</div>
+  </div>
+  <p>Photoshop</p>
+  <div class="w3-grey">
+    <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:80%">80%</div>
+  </div>
+  <p>
+   
+  </p> 
+-->
+  <hr>
+  
+  <h4 id= "courses">Payments and courses</h4>
+  <!-- Pricing Tables -->
+  <div class="w3-container w3-padding-large w3-grey">
+  <div class="container" style="flex: .80;">
+   
+    <div class="row " style="margin: 0; padding: 0;">
+  {% for c in courses   %}
+ 
+  <div class=" col-md-5" style="margin-bottom: 25px;  -webkit-box-shadow: 18px 18px 22px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 18px 18px 22px 0px rgba(0,0,0,0.75);
+  box-shadow: 18px 18px 22px 0px rgba(0,0,0,0.75); "  >
+   
+      <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
+        <li class="w3-black w3-xlarge w3-padding-32">{{c.title}}</li>
+        <li class="w3-padding-16">{{c.academy}}</li>
+        <li class="w3-padding-16">{{c.duriation}} semister</li>
+        <li class="w3-padding-16">{{c.payment}} birr/semister</li>
+        
+      </ul>
+ </div>
+  
+ 
+  {% endfor %}
+ 
+
+ </div>
+</div>
+</div>
+<br><br><br>
+
+<!-- Contact Section -->
+<div class="w3-container w3-padding-large w3-grey">
+  <h4 id="contact"><b>Contact Us</b></h4>
+  <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
+    <div class="w3-third w3-dark-grey">
+      <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
+      <p>email@email.com</p>
+    </div>
+    <div class="w3-third w3-teal">
+      <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
+      <p>Wolkite, Ethiopia</p>
+    </div>
+    <div class="w3-third w3-dark-grey">
+      <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
+      <p>512312311</p>
+    </div>
+  </div>
+  <hr class="w3-opacity">
+  <form action="{% url 'message' %}"  method="post">
+    {% csrf_token %}
+    <div class="w3-section">
+      <label>Name</label>
+      <input class="w3-input w3-border" type="text" name="name" required>
+    </div>
+    <div class="w3-section">
+      <label>Email</label>
+      <input class="w3-input w3-border" type="text" name="email" required>
+    </div>
+    <div class="w3-section">
+      <label>Message</label>
+      <input class="w3-input w3-border" type="text" name="message" required>
+    </div>
+    <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Send Message</button>
+  </form>
+</div>
+
+<!-- Footer -->
+
+{% endblock content %}

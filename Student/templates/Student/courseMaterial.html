@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row " style="margin: 0; padding: 0;">
+  <section class="main">
+    <div class="main-top">
+     
+      
+    </div>
+  
+    {% for ac in academy %}
+    <div class="">
+      
+        <form action="academic-detail" method="post">
+          {% csrf_token %}
+        <div class="w3-third w3-container w3-margin-bottom"><input type="text" name="name" id="" value="{{ac.Ac_name}}" hidden>
+         <button type="submit"> <img src="{{ ac.logo.url }}" alt="Norway" style="width:100%; height: 100%" class="w3-hover-opacity"></button>
+         </form>  <div class="w3-container w3-white">
+          <p><b>{{ ac.Ac_name }}</b></p>
+    <p id="less" style="display: block;">{{ ac.description | slice:"0:100" }} </p>
+    
+    <p>Webite Link for <a href="{{ ac.official_web }}"> {{ ac.Ac_name }} </a>
+        </div>
+      </div>
+      {% endfor %}
+     
+      </div>
+
+      
+    </section>
+
+</div>
+{% endblock content %}
