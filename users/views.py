@@ -99,8 +99,8 @@ def logout(request):
     auth.logout(request)
     return redirect('index')
 
-def acdetail(request):
-    a= Academy.objects.filter(Ac_name= request.POST['name']).first()
+def acdetail(request,name):
+    a= Academy.objects.filter(Ac_name=name).first()
     c= course.objects.filter(academy = a)
     context= {
         'courses': c

@@ -6,7 +6,7 @@ urlpatterns = [
     path('message', views.UserMess, name='message'),
     path('reciteUpload', views.reciteUpload, name= 'reciteUpload'),
     path('updateProfile', views.profile_update, name= 'updateProfile'),
-    path('academic-detail', views.acdetail, name='academic-detail'),
+    path('academic-detail/<str:name>/', views.acdetail, name='academic-detail'),
     
 
 ]
