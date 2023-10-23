@@ -3,7 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render,redirect
 from . forms import *
-from django.contrib.auth.models import User
+from users.models import user
+
 from django.contrib import messages,auth
 from django.contrib.auth.decorators import *
 from users.models import *
@@ -56,6 +57,14 @@ def addStudent(request):
     
     return render(request, 'Coordinator/validateRecite.html', context)
 
+def students(request):
+      
+    context={
+        'recite': user.objects.filter(Roll= "student")
+        
+    }
+    
+    return render(request, 'Coordinator/validateRecite.html', context)
 
 
 def validate(request):

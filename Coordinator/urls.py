@@ -7,6 +7,7 @@ urlpatterns = [
     path('addCourse', views.addcourse, name= 'add-course'),
     path('addStudent', views.addStudent, name= 'addStudent'),
     path('validate', views.validate, name= 'validate'),
+    path('studentsList',views.students, name="studlist")
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
